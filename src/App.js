@@ -7,22 +7,11 @@ import imagem3 from "./img/forca3.png"
 import imagem4 from "./img/forca4.png"
 import imagem5 from "./img/forca5.png"
 import imagem6 from "./img/forca6.png"
+import { useState } from "react"
 
 
 
 
-function PalavraEscondida() {
-    const arrDePalavras = palavras
-
-    const sortearPalavra = Math.floor(Math.random() * arrDePalavras.length);
-
-    const arrayComPalavraAleatória = arrDePalavras[sortearPalavra]
-
-    const arrayDePalavras = arrayComPalavraAleatória.split('')
-
-    console.log(arrayDePalavras)
-    
-}
 
 function ColocarLetraNaTela(objeto) {
     console.log(objeto)
@@ -31,15 +20,51 @@ function ColocarLetraNaTela(objeto) {
 function Letras(props) {
     return (
         <>{props.texto}</>
-    )
-}
+        )
+    }
+    function Letras2(props) {
+        return (
+            <>{props.texto}</>
+            )
+        }
+        
+        export default function App() {
 
-export default function App() {
+                        // variável que sorteia a palavra ------------------------
+            const arrDePalavras = palavras
+            const sortearPalavra = Math.floor(Math.random() * arrDePalavras.length);
+            const arrayComPalavraAleatória = arrDePalavras[sortearPalavra]
+            const arrayDePalavras = arrayComPalavraAleatória.split('')
+
+                        //---------------------------------------------------------
+
+            const arrayVaziaDeUnderlines = []
+
+            const [arrayDeUnderlines, SetarrayDeUnderlines] = useState([])
+
+            const [implementarArrayNova, SetimplementarArrayNova] = useState([])
 
 
+            function PalavraEscondida() {
 
 
+                for(let i=0;i<arrayDePalavras.length;i++){
 
+                    arrayVaziaDeUnderlines.push("_")
+                }
+                SetarrayDeUnderlines(arrayVaziaDeUnderlines)
+
+                console.log(arrayVaziaDeUnderlines)
+                
+                const novosItens = [...implementarArrayNova, arrayDePalavras]
+
+                SetimplementarArrayNova(novosItens)
+
+            }
+
+                
+
+        
 
 
 
@@ -58,7 +83,9 @@ export default function App() {
                     <div className='escolher-palavra' onClick={PalavraEscondida}>
                         Escolher palavra
                     </div>
-                    <div className="palavra-escondida"></div>
+                    <ul className="palavra-escondida">
+                        <li>{arrayDeUnderlines}</li>
+                    </ul>
                 </div>
             </div>
             <div className="parte-baixo">
