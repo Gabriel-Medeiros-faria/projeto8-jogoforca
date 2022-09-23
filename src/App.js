@@ -1,4 +1,5 @@
 import "./App.css"
+import palavras from "./palavras"
 import imagem0 from "./img/forca0.png"
 import imagem1 from "./img/forca1.png"
 import imagem2 from "./img/forca2.png"
@@ -10,20 +11,36 @@ import imagem6 from "./img/forca6.png"
 
 
 
+function PalavraEscondida() {
+    const arrDePalavras = palavras
 
+    const sortearPalavra = Math.floor(Math.random() * arrDePalavras.length);
 
-function ColocarLetraNaTela(){
+    const arrayComPalavraAleatória = arrDePalavras[sortearPalavra]
 
+    const arrayDePalavras = arrayComPalavraAleatória.split('')
+
+    console.log(arrayDePalavras)
+}
+
+function ColocarLetraNaTela(objeto) {
+    console.log(objeto)
 }
 
 function Letras(props) {
-    console.log(props)
     return (
         <>{props.texto}</>
     )
 }
 
 export default function App() {
+
+
+
+
+
+
+
 
     const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
@@ -36,19 +53,26 @@ export default function App() {
                 <div className='img-forca'>
                     <img src={imagem0} alt='' />
                 </div>
-
-                <div className='escolher-palavra'>
-                    escolher palavra
+                <div>
+                    <div className='escolher-palavra' onClick={PalavraEscondida}>
+                        Escolher palavra
+                    </div>
+                    <div className="palavra-escondida"></div>
                 </div>
             </div>
             <div className="parte-baixo">
                 <div className="letras-caixa">
                     <ul className="letras">
-                        {letrasParaMostrar.map((l) => <li onClick={ColocarLetraNaTela}>{<Letras texto={l.letra}/>}</li>)}
+                        {letrasParaMostrar.map((l, indice) => <li onClick={() => ColocarLetraNaTela(l)}>{<Letras texto={l.letra} />}</li>)}
                     </ul>
                 </div>
                 <div className="resposta">
+                    <div className="sei-palavra">Ja sei a palavra !!</div>
+                    <input placeholder="Digite seu palpite"
 
+                        onChange={(event) => console.log(event.target.value)} />
+
+                    <div className="chute">Chute</div>
                 </div>
             </div>
         </div>
