@@ -21,6 +21,7 @@ function PalavraEscondida() {
     const arrayDePalavras = arrayComPalavraAleatória.split('')
 
     console.log(arrayDePalavras)
+    
 }
 
 function ColocarLetraNaTela(objeto) {
